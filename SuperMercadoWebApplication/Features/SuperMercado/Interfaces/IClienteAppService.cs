@@ -1,4 +1,6 @@
 using SuperMercadoWebApplication.Entities.Supermercado;
+namespace SuperMercadoWebApplication.Features.SuperMercado.Interfaces;
+
 public interface IClienteAppService
 {
     Task<List<Cliente>> ObtenerClientes();
