@@ -1,6 +1,8 @@
 public interface IEmpleadoAppService
 {
-    Task<IEnumerable<Empleado>> ListarPlanilla();
-    Task Registrar(Empleado empleado);
-    Task Inactivar(int id);
+    Task<List<Empleado>> ObtenerEmpleados();
+    Task<Empleado> ObtenerEmpleadoPorId(int id);
+    Task GuardarEmpleado(Empleado Empleado);
+    Task ActualizarEmpleado(Empleado Empleado);
+    Task EliminarEmpleado(int id);
 }
