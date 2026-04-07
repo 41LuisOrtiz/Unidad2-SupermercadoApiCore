@@ -1,4 +1,4 @@
-using 
+using SuperMercadoWebApplication.Entities.Supermercado;
 public interface ICategoriaAppService
 {
     Task<List<Categoria>> ObtenerCategorias();

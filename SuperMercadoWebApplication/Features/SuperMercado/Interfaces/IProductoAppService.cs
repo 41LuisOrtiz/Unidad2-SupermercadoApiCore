@@ -1,3 +1,4 @@
+using SuperMercadoWebApplication.Entities.Supermercado;
 public interface IProductoAppService
 {
     Task<List<Producto>> ObtenerProductos();

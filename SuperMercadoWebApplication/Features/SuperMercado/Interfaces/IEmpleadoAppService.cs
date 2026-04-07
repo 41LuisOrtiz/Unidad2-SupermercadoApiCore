@@ -1,3 +1,4 @@
+using SuperMercadoWebApplication.Entities.Supermercado;
 public interface IEmpleadoAppService
 {
     Task<List<Empleado>> ObtenerEmpleados();

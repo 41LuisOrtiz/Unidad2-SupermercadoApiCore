@@ -1,3 +1,4 @@
+using SuperMercadoWebApplication.Entities.Supermercado;
 public interface IClienteAppService
 {
     Task<List<Cliente>> ObtenerClientes();
