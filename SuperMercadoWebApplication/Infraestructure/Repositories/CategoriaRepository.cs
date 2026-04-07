@@ -38,3 +38,5 @@ namespace SuperMercadoWebApplication.Infraestructure.Repositories
             return await superDbContext.Categorias.ToListAsync();
         }
     }
+
+}
