@@ -2,10 +2,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-// Registro de Domain Services
-builder.Services.AddScoped<IProductoDomainService, ProductoDomainService>();
+// Registro del Servicio de Dominio
+builder.Services.AddScoped<ICategoriaDomainService, CategoriaDomainService>();
+// Registro del Servicio de Aplicación 
+builder.Services.AddScoped<ICategoriaAppService, CategoriaAppService>();
 
-// Registro de App Services
+builder.Services.AddScoped<IProductoDomainService, ProductoDomainService>();
+builder.Services.AddScoped<IProductoAppService, ProductoAppService>();
+
+builder.Services.AddScoped<IClienteDomainService, ClienteDomainService>();
+builder.Services.AddScoped<IClienteAppService, ClienteAppService>();
+
+builder.Services.AddScoped<IProductoDomainService, ProductoDomainService>();
 builder.Services.AddScoped<IProductoAppService, ProductoAppService>();
 
 builder.Services.AddControllers();
