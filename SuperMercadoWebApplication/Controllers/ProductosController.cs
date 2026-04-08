@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SuperMercadoWebApplication.Entities.Supermercado;
-using SuperMercadoWebApplication.Features.SuperMercado.Interfaces;
+using SuperMercadoWebApplication.Infraestructure.Interfases;
 
 namespace SuperMercadoWebApplication.Controllers
 {
@@ -9,11 +9,11 @@ namespace SuperMercadoWebApplication.Controllers
     [Produces("application/json")]
     public class ProductosController : ControllerBase
     {
-        private readonly IProductoAppService _productoAppService;
+        private readonly InterfaceProductoRepository _productoRepository;
 
-        public ProductosController(IProductoAppService productoAppService)
+        public ProductosController(InterfaceProductoRepository productoRepository)
         {
-            _productoAppService = productoAppService;
+            _productoRepository = productoRepository;
         }
 
         // GET: api/productos
@@ -21,7 +21,7 @@ namespace SuperMercadoWebApplication.Controllers
         [ProducesResponseType(typeof(List<Producto>), 200)]
         public async Task<IActionResult> ObtenerProductos()
         {
-            var productos = await _productoAppService.ObtenerProductos();
+            var productos = await _productoRepository.ObtenerProductos();
             return Ok(productos);
         }
 
@@ -31,7 +31,7 @@ namespace SuperMercadoWebApplication.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> ObtenerProductoPorId(int id)
         {
-            var producto = await _productoAppService.ObtenerProductoPorId(id);
+            var producto = await _productoRepository.ObtenerProductoPorId(id);
 
             if (producto.ProductoId == 0)
                 return NotFound(new { mensaje = $"Producto con ID {id} no encontrado." });
@@ -49,11 +49,7 @@ namespace SuperMercadoWebApplication.Controllers
                 return BadRequest(ModelState);
 
             producto.Activo = true;
-            var resultado = await _productoAppService.GuardarProducto(producto);
-
-            if (!resultado.Success)
-                return BadRequest(new { mensaje = resultado.Message });
-
+            await _productoRepository.GuardarProducto(producto);
             return StatusCode(201, producto);
         }
 
@@ -66,7 +62,7 @@ namespace SuperMercadoWebApplication.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _productoAppService.ActualizarProducto(producto);
+            await _productoRepository.ActualizarProducto(producto);
             return Ok(producto);
         }
 
@@ -76,12 +72,12 @@ namespace SuperMercadoWebApplication.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> EliminarProducto(int id)
         {
-            var producto = await _productoAppService.ObtenerProductoPorId(id);
+            var producto = await _productoRepository.ObtenerProductoPorId(id);
 
             if (producto.ProductoId == 0)
                 return NotFound(new { mensaje = $"Producto con ID {id} no encontrado." });
 
-            await _productoAppService.EliminarProducto(id);
+            await _productoRepository.EliminarProducto(id);
             return Ok(new { mensaje = "Producto inactivado correctamente." });
         }
     }

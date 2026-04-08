@@ -4,11 +4,11 @@ using SuperMercadoWebApplication.Infraestructure.Interfases;
 using Microsoft.EntityFrameworkCore;
 namespace SuperMercadoWebApplication.Infraestructure.Repositories
 {
-    public class CategoriasRepository : InterfaceCategoriaRepository
+    public class CategoriaRepository : InterfaceCategoriaRepository
     {
         private readonly SuperDbContext superDbContext;
 
-        public CategoriasRepository(SuperDbContext superDbContext)
+        public CategoriaRepository(SuperDbContext superDbContext)
         {
             this.superDbContext = superDbContext;
         }
@@ -33,10 +33,7 @@ namespace SuperMercadoWebApplication.Infraestructure.Repositories
             await superDbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Categoria>> ObtenerCategorias()
-        {
-            return await superDbContext.Categorias.ToListAsync();
-        }
+        public async Task<List<Categoria>> ObtenerCategorias() => await superDbContext.Categorias.ToListAsync();
     }
 
 }

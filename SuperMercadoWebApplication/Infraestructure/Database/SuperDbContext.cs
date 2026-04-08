@@ -1,21 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using SuperMercadoWebApplication.Entities.Supermercado;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuperMercadoWebApplication.Infraestructure.Database
 {
     public class SuperDbContext : DbContext
 
     {
-        public SuperDbContext(DbContextOptions<SuperDbContext> options) : base(options)
+        public SuperDbContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<Entities.Supermercado.Cliente> Clientes { get; set; }
-        public DbSet<Entities.Supermercado.Empleado> Empleados { get; set; }
-        public DbSet<Entities.Supermercado.Producto> Productos { get; set; }
-        public DbSet<Entities.Supermercado.Categoria> Categorias { get; set; }
+        public DbSet<Cliente> Clientes => Set<Cliente>();
+        public DbSet<Empleado> Empleados => Set<Empleado>();
+        public DbSet<Producto> Productos => Set<Producto>();
+        public DbSet<Categoria> Categorias => Set<Categoria>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Entities.Supermercado.Cliente>(entity =>
+            modelBuilder.Entity<Cliente>(entity =>
             {
                 entity.ToTable("Clientes");
                 entity.HasKey(e => e.ClienteId);

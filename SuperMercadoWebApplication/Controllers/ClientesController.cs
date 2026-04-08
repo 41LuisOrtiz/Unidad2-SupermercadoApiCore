@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SuperMercadoWebApplication.Entities.Supermercado;
-using SuperMercadoWebApplication.Features.SuperMercado.Interfaces;
+using SuperMercadoWebApplication.Infraestructure.Interfases;
 
 namespace SuperMercadoWebApplication.Controllers
 {
@@ -8,29 +8,28 @@ namespace SuperMercadoWebApplication.Controllers
     [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
-        private readonly IClienteAppService _clienteAppService;
+        private readonly InterfaceClienteRepository _clienteRepository;
 
-        public ClientesController(IClienteAppService clienteAppService)
+        public ClientesController(InterfaceClienteRepository clienteRepository)
         {
-            _clienteAppService = clienteAppService;
+            _clienteRepository = clienteRepository;
         }
 
-        // GET: api/clientes/ObtenerClientes
+        // GET: api/clientes
         [HttpGet]
-        [Route("ObtenerClientes")]  // FIX: se eliminó el espacio en blanco al final
+        [Route("ObtenerClientes ")]
         public async Task<IActionResult> ObtenerClientes()
         {
-            var clientes = await _clienteAppService.ObtenerClientes();
+            var clientes = await _clienteRepository.ObtenerClientes();
             return Ok(clientes);
         }
 
-        // GET: api/clientes/ObtenerClientePorId/5
-        [HttpGet("ObtenerClientePorId/{id:int}")]  // FIX: atributos de ruta unificados en uno solo
-        [ProducesResponseType(typeof(Cliente), 200)]
-        [ProducesResponseType(404)]
+        // GET: api/clientes/5
+        [HttpGet("{id:int}")]
+        [Route("ObtenerClientePorId")]
         public async Task<IActionResult> ObtenerClientePorId(int id)
         {
-            var cliente = await _clienteAppService.ObtenerClientePorId(id);
+            var cliente = await _clienteRepository.ObtenerClientePorId(id);
 
             if (cliente.ClienteId == 0)
                 return NotFound(new { mensaje = $"Cliente con ID {id} no encontrado." });
@@ -38,7 +37,7 @@ namespace SuperMercadoWebApplication.Controllers
             return Ok(cliente);
         }
 
-        // POST: api/clientes/GuardarCliente
+        // POST: api/clientes
         [HttpPost]
         [Route("GuardarCliente")]
         public async Task<IActionResult> GuardarCliente([FromBody] Cliente cliente)
@@ -47,23 +46,18 @@ namespace SuperMercadoWebApplication.Controllers
                 return BadRequest(ModelState);
 
             cliente.Activo = true;
-            var resultado = await _clienteAppService.GuardarCliente(cliente);
-
-            if (!resultado.Success)
-                return BadRequest(new { mensaje = resultado.Message });
-
+            await _clienteRepository.GuardarCliente(cliente);
             return StatusCode(201, cliente);
         }
 
-        // PUT: api/clientes/Actualizar
-        [HttpPut]
-        [Route("Actualizar")]
+        // PUT: api/clientes
+        [HttpPut][Route("Actualizar")]
         public async Task<IActionResult> ActualizarCliente([FromBody] Cliente cliente)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _clienteAppService.ActualizarCliente(cliente);
+            await _clienteRepository.ActualizarCliente(cliente);
             return Ok(cliente);
         }
 
@@ -73,12 +67,12 @@ namespace SuperMercadoWebApplication.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> EliminarCliente(int id)
         {
-            var cliente = await _clienteAppService.ObtenerClientePorId(id);
+            var cliente = await _clienteRepository.ObtenerClientePorId(id);
 
             if (cliente.ClienteId == 0)
                 return NotFound(new { mensaje = $"Cliente con ID {id} no encontrado." });
 
-            await _clienteAppService.EliminarCliente(id);
+            await _clienteRepository.EliminarCliente(id);
             return Ok(new { mensaje = "Cliente inactivado correctamente." });
         }
     }

@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SuperMercadoWebApplication.Entities.Supermercado;
-using SuperMercadoWebApplication.Features.SuperMercado.Interfaces;
+using SuperMercadoWebApplication.Infraestructure.Interfases;
 
 namespace SuperMercadoWebApplication.Controllers
 {
@@ -9,11 +9,11 @@ namespace SuperMercadoWebApplication.Controllers
     [Produces("application/json")]
     public class EmpleadosController : ControllerBase
     {
-        private readonly IEmpleadoAppService _empleadoAppService;
+        private readonly InterfaceEmpleadoRepository _empleadoRepository;
 
-        public EmpleadosController(IEmpleadoAppService empleadoAppService)
+        public EmpleadosController(InterfaceEmpleadoRepository empleadoRepository)
         {
-            _empleadoAppService = empleadoAppService;
+            _empleadoRepository = empleadoRepository;
         }
 
         // GET: api/empleados
@@ -21,7 +21,7 @@ namespace SuperMercadoWebApplication.Controllers
         [ProducesResponseType(typeof(List<Empleado>), 200)]
         public async Task<IActionResult> ObtenerEmpleados()
         {
-            var empleados = await _empleadoAppService.ObtenerEmpleados();
+            var empleados = await _empleadoRepository.ObtenerEmpleados();
             return Ok(empleados);
         }
 
@@ -31,7 +31,7 @@ namespace SuperMercadoWebApplication.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> ObtenerEmpleadoPorId(int id)
         {
-            var empleado = await _empleadoAppService.ObtenerEmpleadoPorId(id);
+            var empleado = await _empleadoRepository.ObtenerEmpleadoPorId(id);
 
             if (empleado.EmpleadoId == 0)
                 return NotFound(new { mensaje = $"Empleado con ID {id} no encontrado." });
@@ -49,11 +49,7 @@ namespace SuperMercadoWebApplication.Controllers
                 return BadRequest(ModelState);
 
             empleado.Activo = true;
-            var resultado = await _empleadoAppService.GuardarEmpleado(empleado);
-
-            if (!resultado.Success)
-                return BadRequest(new { mensaje = resultado.Message });
-
+            await _empleadoRepository.GuardarEmpleado(empleado);
             return StatusCode(201, empleado);
         }
 
@@ -66,7 +62,7 @@ namespace SuperMercadoWebApplication.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _empleadoAppService.ActualizarEmpleado(empleado);
+            await _empleadoRepository.ActualizarEmpleado(empleado);
             return Ok(empleado);
         }
 
@@ -76,12 +72,12 @@ namespace SuperMercadoWebApplication.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> EliminarEmpleado(int id)
         {
-            var empleado = await _empleadoAppService.ObtenerEmpleadoPorId(id);
+            var empleado = await _empleadoRepository.ObtenerEmpleadoPorId(id);
 
             if (empleado.EmpleadoId == 0)
                 return NotFound(new { mensaje = $"Empleado con ID {id} no encontrado." });
 
-            await _empleadoAppService.EliminarEmpleado(id);
+            await _empleadoRepository.EliminarEmpleado(id);
             return Ok(new { mensaje = "Empleado inactivado correctamente." });
         }
     }
