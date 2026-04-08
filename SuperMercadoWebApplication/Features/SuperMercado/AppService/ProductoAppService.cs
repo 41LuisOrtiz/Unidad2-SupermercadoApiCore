@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using SuperMercadoWebApplication.Entities.Supermercado;
 using SuperMercadoWebApplication.Features.SuperMercado.Dtos;
 using SuperMercadoWebApplication.Features.SuperMercado.DomainService;
@@ -82,5 +83,11 @@ namespace SuperMercadoWebApplication.Features.SuperMercado.AppService
 
             return productosConCategoria;
         }
+=======
+﻿namespace SuperMercadoWebApplication.Features.SuperMercado.AppService
+{
+    public class ProductoAppService
+    {
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
     }
 }

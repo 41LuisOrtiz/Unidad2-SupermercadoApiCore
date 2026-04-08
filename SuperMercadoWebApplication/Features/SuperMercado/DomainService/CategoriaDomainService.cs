@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using SuperMercadoWebApplication.Entities.Supermercado;
 
 namespace SuperMercadoWebApplication.Features.SuperMercado.DomainService
@@ -20,5 +21,11 @@ namespace SuperMercadoWebApplication.Features.SuperMercado.DomainService
             apiResponse.Data = categoria;
             return apiResponse;
         }
+=======
+﻿namespace SuperMercadoWebApplication.Features.SuperMercado.DomainService
+{
+    public class CategoriaDomainService
+    {
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
     }
 }

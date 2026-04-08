@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+=======
+<Project Sdk="Microsoft.NET.Sdk.Web">
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -7,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Remove="Features\SuperMercado\Interfases\**" />
     <Content Remove="Features\SuperMercado\Interfases\**" />
     <EmbeddedResource Remove="Features\SuperMercado\Interfases\**" />
@@ -14,9 +19,18 @@
   </ItemGroup>
 
   <ItemGroup>
+=======
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.5" />
   </ItemGroup>
 
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <Folder Include="Features\SuperMercado\Interfases\" />
+  </ItemGroup>
+
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
 </Project>

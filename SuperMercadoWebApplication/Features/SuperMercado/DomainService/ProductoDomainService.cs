@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using SuperMercadoWebApplication.Entities.Supermercado;
 using SuperMercadoWebApplication;
 using Microsoft.IdentityModel.Tokens;
@@ -32,5 +33,11 @@ namespace SuperMercadoWebApplication.Features.SuperMercado.DomainService
             
             return apiResponse;
         }
+=======
+﻿namespace SuperMercadoWebApplication.Features.SuperMercado.DomainService
+{
+    public class ProductoDomainService
+    {
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
     }
 }

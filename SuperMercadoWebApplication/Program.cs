@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
 using SuperMercadoWebApplication.Features.SuperMercado.Interfaces;
 using SuperMercadoWebApplication.Features.SuperMercado.AppService;
@@ -31,6 +32,11 @@ builder.Services.AddScoped<ICategoriaAppService, CategoriaAppService>();
 builder.Services.AddScoped<IClienteAppService, ClienteAppService>();
 builder.Services.AddScoped<IEmpleadoAppService, EmpleadoAppService>();
 builder.Services.AddScoped<IProductoAppService, ProductoAppService>();
+=======
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

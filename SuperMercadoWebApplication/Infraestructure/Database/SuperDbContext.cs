@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 ﻿using SuperMercadoWebApplication.Entities.Supermercado;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+=======
+﻿using Microsoft.EntityFrameworkCore;
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
 
 namespace SuperMercadoWebApplication.Infraestructure.Database
 {
     public class SuperDbContext : DbContext
 
     {
+<<<<<<< HEAD
         public SuperDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -18,6 +23,19 @@ namespace SuperMercadoWebApplication.Infraestructure.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cliente>(entity =>
+=======
+        public SuperDbContext(DbContextOptions<SuperDbContext> options) : base(options)
+        {
+        }
+        public DbSet<Entities.Supermercado.Cliente> Clientes { get; set; }
+        public DbSet<Entities.Supermercado.Empleado> Empleados { get; set; }
+        public DbSet<Entities.Supermercado.Producto> Productos { get; set; }
+        public DbSet<Entities.Supermercado.Categoria> Categorias { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Entities.Supermercado.Cliente>(entity =>
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
             {
                 entity.ToTable("Clientes");
                 entity.HasKey(e => e.ClienteId);

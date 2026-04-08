@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using SuperMercadoWebApplication.Entities.Supermercado;
 using SuperMercadoWebApplication.Features.SuperMercado.DomainService;
 using SuperMercadoWebApplication.Features.SuperMercado.Interfaces;
@@ -56,5 +57,11 @@ namespace SuperMercadoWebApplication.Features.SuperMercado.AppService
         {
             return await empleadoRepository.ObtenerEmpleados();
         }
+=======
+﻿namespace SuperMercadoWebApplication.Features.SuperMercado.AppService
+{
+    public class EmpleadoAppService
+    {
+>>>>>>> ce25912481bb92e7f930e96c7e3f7667d7705ed4
     }
 }
