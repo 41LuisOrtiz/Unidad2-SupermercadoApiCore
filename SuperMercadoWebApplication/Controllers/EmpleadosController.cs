@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using SuperMercadoWebApplication.Entities.Supermercado;
 using SuperMercadoWebApplication.Infraestructure.Interfases;
 

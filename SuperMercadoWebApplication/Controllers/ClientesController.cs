@@ -17,7 +17,7 @@ namespace SuperMercadoWebApplication.Controllers
 
         // GET: api/clientes
         [HttpGet]
-        [Route("ObtenerClientes ")]
+        [Route("ObtenerClientes")]
         public async Task<IActionResult> ObtenerClientes()
         {
             var clientes = await _clienteRepository.ObtenerClientes();
@@ -25,8 +25,8 @@ namespace SuperMercadoWebApplication.Controllers
         }
 
         // GET: api/clientes/5
-        [HttpGet("{id:int}")]
-        [Route("ObtenerClientePorId")]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> ObtenerClientePorId(int id)
         {
             var cliente = await _clienteRepository.ObtenerClientePorId(id);

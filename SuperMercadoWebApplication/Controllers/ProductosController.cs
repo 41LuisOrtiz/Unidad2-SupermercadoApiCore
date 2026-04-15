@@ -18,7 +18,7 @@ namespace SuperMercadoWebApplication.Controllers
 
         // GET: api/productos
         [HttpGet]
-        [ProducesResponseType(typeof(List<Producto>), 200)]
+        [Route("ObtenerProductos")]
         public async Task<IActionResult> ObtenerProductos()
         {
             var productos = await _productoRepository.ObtenerProductos();
@@ -26,9 +26,8 @@ namespace SuperMercadoWebApplication.Controllers
         }
 
         // GET: api/productos/5
-        [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(Producto), 200)]
-        [ProducesResponseType(404)]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> ObtenerProductoPorId(int id)
         {
             var producto = await _productoRepository.ObtenerProductoPorId(id);
