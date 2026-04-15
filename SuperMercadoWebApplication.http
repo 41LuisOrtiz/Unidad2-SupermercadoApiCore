@@ -1,6 +1,0 @@
-@SuperMercadoWebApplication_HostAddress = http://localhost:5064
-
-GET {{SuperMercadoWebApplication_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
